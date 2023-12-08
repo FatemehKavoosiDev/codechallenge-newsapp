@@ -1,4 +1,4 @@
-package com.example.codechallengenewsapp.data.datasource.network
+package com.example.codechallengenewsapp.data.datasource.network.models
 
 import com.google.gson.annotations.SerializedName
 

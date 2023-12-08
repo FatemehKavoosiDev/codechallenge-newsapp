@@ -9,7 +9,7 @@ plugins {
 
 android {
     namespace = "com.example.codechallengenewsapp"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.codechallengenewsapp"

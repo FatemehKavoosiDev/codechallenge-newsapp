@@ -1,7 +1,8 @@
-package com.example.codechallengenewsapp
+package com.example.codechallengenewsapp.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.codechallengenewsapp.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

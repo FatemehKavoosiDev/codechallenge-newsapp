@@ -13,7 +13,7 @@ internal data class NewsNetwork(
     @SerializedName("content") val content: String,
 )
 
-data class Source(
+internal data class Source(
     @SerializedName("id") val id: String,
     @SerializedName("name") val name: String,
 )

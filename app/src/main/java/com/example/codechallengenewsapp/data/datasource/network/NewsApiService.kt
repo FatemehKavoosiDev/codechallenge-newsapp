@@ -1,5 +1,7 @@
 package com.example.codechallengenewsapp.data.datasource.network
 
+import com.example.codechallengenewsapp.data.datasource.network.models.BaseResponse
+import com.example.codechallengenewsapp.data.datasource.network.models.NewsNetwork
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

@@ -7,7 +7,5 @@ import javax.inject.Inject
 
 internal class NewsUseCase @Inject constructor(private val newsRepository: NewsRepository) {
 
-    fun getNews(): Flow<Result<News>> {
-        TODO()
-    }
+    operator fun invoke(): Flow<Result<List<News>>> = newsRepository.getAllNews()
 }

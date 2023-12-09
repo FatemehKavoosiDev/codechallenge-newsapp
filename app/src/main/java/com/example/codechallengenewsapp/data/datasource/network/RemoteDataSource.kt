@@ -5,5 +5,5 @@ import com.example.codechallengenewsapp.data.datasource.network.models.NewsNetwo
 import retrofit2.Response
 
 internal interface RemoteDataSource {
-    suspend fun getAllNews(): Response<BaseResponse<NewsNetwork>>
+    suspend fun getAllNews():  Response<BaseResponse<NewsNetwork>>
 }

@@ -4,6 +4,6 @@ import com.example.codechallengenewsapp.data.model.News
 import kotlinx.coroutines.flow.Flow
 
 internal interface NewsRepository {
-    fun getAllNews(): Flow<News>
+    fun getAllNews():  Flow<Result<List<News>>>
     fun getNewsDetails(): Flow<News>
 }

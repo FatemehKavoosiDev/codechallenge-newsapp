@@ -26,6 +26,7 @@ class DatabaseModule {
     }
 
     @Provides
+    @Singleton
     fun provideChannelDao(newsDatabase: NewsDatabase): NewsDao {
         return newsDatabase.newsDao()
     }

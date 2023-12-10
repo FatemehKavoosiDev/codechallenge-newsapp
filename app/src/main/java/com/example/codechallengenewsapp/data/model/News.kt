@@ -1,7 +1,5 @@
 package com.example.codechallengenewsapp.data.model
 
-import com.example.codechallengenewsapp.data.datasource.network.models.Source
-
 internal data class News(
     val source: Source,
     val author: String?,
@@ -11,4 +9,8 @@ internal data class News(
     val urlToImage: String?,
     val publishedAt: String,
     val content: String?,
+)
+internal data class Source(
+    val id: String?,
+    val name: String,
 )

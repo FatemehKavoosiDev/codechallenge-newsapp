@@ -48,9 +48,9 @@ internal class NewsRepositoryImpl @Inject constructor(
     }
 
     override fun getNewsDetails(id: Int): Flow<NewsDetails> = flow {
-        localDataSource.getNewsDetails(id).map { newsEntity ->
+        emitAll(localDataSource.getNewsDetails(id).map { newsEntity ->
             newsEntity.mapToNewsDetails()
-        }
+        })
     }
 
 }

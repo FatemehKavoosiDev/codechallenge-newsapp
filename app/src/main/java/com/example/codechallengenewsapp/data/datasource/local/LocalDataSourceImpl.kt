@@ -10,12 +10,12 @@ internal class LocalDataSourceImpl @Inject constructor(private val newsDao: News
     override fun getAllNews(): Flow<List<NewsEntity>> =
         newsDao.getAllNews()
 
-    override suspend fun insertNews(newsEntity: NewsEntity) {
-        TODO("Not yet implemented")
+    override suspend fun insertNews(newsEntity: List<NewsEntity>) {
+        newsDao.insertNews(newsEntity)
     }
 
     override suspend fun deleteAllNews() {
-        TODO("Not yet implemented")
+        newsDao.deleteAllNews()
     }
 
 }

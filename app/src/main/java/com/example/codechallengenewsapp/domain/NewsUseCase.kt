@@ -7,5 +7,5 @@ import javax.inject.Inject
 
 internal class NewsUseCase @Inject constructor(private val newsRepository: NewsRepository) {
 
-    operator fun invoke(): Flow<Result<List<News>>> = newsRepository.getAllNews()
+    suspend operator fun invoke(): Flow<List<News>> = newsRepository.getAllNews()
 }

@@ -1,25 +1,46 @@
 package com.example.codechallengenewsapp.data.repository
 
+import com.example.codechallengenewsapp.data.datasource.local.LocalDataSource
+import com.example.codechallengenewsapp.data.datasource.local.entity.NewsEntity
 import com.example.codechallengenewsapp.data.datasource.network.RemoteDataSource
 import com.example.codechallengenewsapp.data.model.News
 import com.example.codechallengenewsapp.data.model.mapToNews
+import com.example.codechallengenewsapp.data.model.mapToNewsEntity
+import com.example.codechallengenewsapp.utils.myLog
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-internal class NewsRepositoryImpl @Inject constructor(private val remoteDataSource: RemoteDataSource) :
-    NewsRepository {
-    override fun getAllNews(): Flow<Result<List<News>>> = flow {
-        try {
-
-            val response = remoteDataSource.getAllNews()
-            if (response.isSuccessful)
-                emit(Result.success(response.body()!!.data.map { it.mapToNews() }))
-            else emit(Result.failure(Exception("exception in data layer")))
-
-        } catch (e: Exception) {
-            emit(Result.failure(Exception("exception in data layer $e")))
+internal class NewsRepositoryImpl @Inject constructor(
+    private val remoteDataSource: RemoteDataSource,
+    private val localDataSource: LocalDataSource,
+) : NewsRepository {
+    override suspend fun getAllNews(): Flow<List<News>> {
+        refreshNews()
+        return localDataSource.getAllNews().map { newsEntity ->
+            newsEntity.map {
+                it.mapToNews()
+            }
         }
+    }
+
+    private suspend fun refreshNews() {
+        try {
+            val response = remoteDataSource.getAllNews()
+            if (response.isSuccessful) {
+                val listNewsEntity = response.body()!!.data.map { newsNetwork ->
+                    newsNetwork.mapToNewsEntity()
+                }
+                updateLocalDataSource(listNewsEntity)
+            }
+        } catch (e: Exception) {
+            myLog("error in refresh news $e")
+        }
+    }
+
+    private suspend fun updateLocalDataSource(listNewsEntity: List<NewsEntity>) {
+        localDataSource.deleteAllNews()
+        localDataSource.insertNews(listNewsEntity)
     }
 
     override fun getNewsDetails(): Flow<News> {

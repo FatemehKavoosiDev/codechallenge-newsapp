@@ -4,7 +4,9 @@ import com.example.codechallengenewsapp.data.datasource.local.LocalDataSource
 import com.example.codechallengenewsapp.data.datasource.local.entity.NewsEntity
 import com.example.codechallengenewsapp.data.datasource.network.RemoteDataSource
 import com.example.codechallengenewsapp.data.model.News
+import com.example.codechallengenewsapp.data.model.NewsDetails
 import com.example.codechallengenewsapp.data.model.mapToNews
+import com.example.codechallengenewsapp.data.model.mapToNewsDetails
 import com.example.codechallengenewsapp.data.model.mapToNewsEntity
 import com.example.codechallengenewsapp.utils.myLog
 import kotlinx.coroutines.flow.Flow
@@ -45,8 +47,10 @@ internal class NewsRepositoryImpl @Inject constructor(
         localDataSource.insertNews(listNewsEntity)
     }
 
-    override fun getNewsDetails(): Flow<News> {
-        TODO("Not yet implemented")
+    override fun getNewsDetails(id: Int): Flow<NewsDetails> = flow {
+        localDataSource.getNewsDetails(id).map { newsEntity ->
+            newsEntity.mapToNewsDetails()
+        }
     }
 
 }

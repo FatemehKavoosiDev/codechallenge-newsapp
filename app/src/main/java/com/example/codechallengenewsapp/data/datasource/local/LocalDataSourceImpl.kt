@@ -10,6 +10,9 @@ internal class LocalDataSourceImpl @Inject constructor(private val newsDao: News
     override fun getAllNews(): Flow<List<NewsEntity>> =
         newsDao.getAllNews()
 
+    override fun getNewsDetails(id: Int): Flow<NewsEntity> =
+        newsDao.getNewsDetails(id)
+
     override suspend fun insertNews(newsEntity: List<NewsEntity>) {
         newsDao.insertNews(newsEntity)
     }

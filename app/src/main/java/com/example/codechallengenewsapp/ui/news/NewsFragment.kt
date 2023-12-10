@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.codechallengenewsapp.data.model.News
 import com.example.codechallengenewsapp.databinding.NewsFragmentBinding
 import com.example.codechallengenewsapp.utils.ResultState
+import com.example.codechallengenewsapp.utils.launchAndCollectIn
 import com.example.codechallengenewsapp.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -35,15 +36,14 @@ class NewsFragment : Fragment() {
 
         initAdapter()
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                newsViewModel.newsListFlow.collect { resultState ->
-                    when (resultState) {
-                        is ResultState.Loading -> showLoading(resultState.isShow)
-                        is ResultState.Success -> showNews(resultState.data)
-                        is ResultState.Error -> showError(resultState.errorMessage)
-                    }
-                }
+        newsViewModel.newsListFlow.launchAndCollectIn(
+            this,
+            Lifecycle.State.STARTED
+        ) { resultState ->
+            when (resultState) {
+                is ResultState.Loading -> showLoading(resultState.isShow)
+                is ResultState.Success -> showNews(resultState.data)
+                is ResultState.Error -> showError(resultState.errorMessage)
             }
         }
 

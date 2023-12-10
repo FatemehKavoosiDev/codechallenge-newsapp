@@ -56,8 +56,16 @@ class NewsFragment : Fragment() {
     private fun initAdapter() {
         binding.newsRecyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        newsAdapter = NewsAdapter()
+
+        val onClickItemNewsAdapter: (news: News) -> Unit = {news->
+            navigateToNewsDetailsFragment(news)
+        }
+        newsAdapter = NewsAdapter(onClickItemNewsAdapter)
         binding.newsRecyclerView.adapter = newsAdapter
+    }
+
+    private fun navigateToNewsDetailsFragment(news: News) {
+        TODO("Not yet implemented")
     }
 
     private fun showNews(news: List<News>) {

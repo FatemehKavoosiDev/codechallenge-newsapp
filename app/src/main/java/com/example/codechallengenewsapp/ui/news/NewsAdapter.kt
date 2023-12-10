@@ -8,7 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.codechallengenewsapp.data.model.News
 import com.example.codechallengenewsapp.databinding.ItemNewsAdapterBinding
 
-internal class NewsAdapter : ListAdapter<News, NewsAdapter.NewsViewHolder>(NewsDiffCallback()) {
+internal class NewsAdapter(private val onclickItem: (news: News) -> Unit) :
+    ListAdapter<News, NewsAdapter.NewsViewHolder>(NewsDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -27,6 +28,7 @@ internal class NewsAdapter : ListAdapter<News, NewsAdapter.NewsViewHolder>(NewsD
         fun bind(news: News) {
             binding.newsTitleTextView.text = "pos:$adapterPosition ${news.title}"
             binding.newsContentTextView.text = news.content
+            binding.root.setOnClickListener { onclickItem(news) }
         }
     }
 

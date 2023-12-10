@@ -1,5 +1,7 @@
 package com.example.codechallengenewsapp.di
 
+import com.example.codechallengenewsapp.data.datasource.local.LocalDataSource
+import com.example.codechallengenewsapp.data.datasource.local.LocalDataSourceImpl
 import com.example.codechallengenewsapp.data.datasource.network.RemoteDataSource
 import com.example.codechallengenewsapp.data.datasource.network.RemoteDataSourceImpl
 import com.example.codechallengenewsapp.data.repository.NewsRepository
@@ -15,6 +17,9 @@ internal abstract class BindModule {
 
     @Binds
     abstract fun provideRemoteDataSource(remoteDataSource: RemoteDataSourceImpl): RemoteDataSource
+
+    @Binds
+    abstract fun provideLocalDataSource(localDataSource: LocalDataSourceImpl): LocalDataSource
 
     @Binds
     abstract fun provideRepository(newsRepository: NewsRepositoryImpl): NewsRepository

@@ -5,6 +5,9 @@ plugins {
      //hilt
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
+
+    //navigation
+    id("androidx.navigation.safeargs")
 }
 
 android {
@@ -77,4 +80,8 @@ dependencies {
     implementation("androidx.room:room-ktx:$roomVersion")
     // Optional - Testing Room dependencies
     testImplementation("androidx.room:room-testing:$roomVersion")
+
+    //navigation
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.5")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
 }

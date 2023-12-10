@@ -8,8 +8,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.codechallengenewsapp.data.model.News
 import com.example.codechallengenewsapp.databinding.NewsFragmentBinding
@@ -17,7 +16,6 @@ import com.example.codechallengenewsapp.utils.ResultState
 import com.example.codechallengenewsapp.utils.launchAndCollectIn
 import com.example.codechallengenewsapp.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class NewsFragment : Fragment() {
@@ -54,7 +52,7 @@ class NewsFragment : Fragment() {
         binding.newsRecyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
-        val onClickItemNewsAdapter: (news: News) -> Unit = {news->
+        val onClickItemNewsAdapter: (news: News) -> Unit = { news ->
             navigateToNewsDetailsFragment(news)
         }
         newsAdapter = NewsAdapter(onClickItemNewsAdapter)
@@ -62,7 +60,11 @@ class NewsFragment : Fragment() {
     }
 
     private fun navigateToNewsDetailsFragment(news: News) {
-        TODO("Not yet implemented")
+        findNavController().navigate(
+            NewsFragmentDirections.actionNewsFragmentToNewsDetailsFragment(
+                news.id
+            )
+        )
     }
 
     private fun showNews(news: List<News>) {

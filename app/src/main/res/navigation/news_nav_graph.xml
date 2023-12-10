@@ -9,5 +9,19 @@
         android:id="@+id/newsFragment"
         android:name="com.example.codechallengenewsapp.ui.news.NewsFragment"
         android:label="news_fragment"
-        tools:layout="@layout/news_fragment" />
+        tools:layout="@layout/news_fragment">
+        <action
+            android:id="@+id/action_newsFragment_to_newsDetailsFragment"
+            app:destination="@id/newsDetailsFragment"
+          />
+    </fragment>
+    <fragment
+        android:id="@+id/newsDetailsFragment"
+        android:name="com.example.codechallengenewsapp.ui.newsdetails.NewsDetailsFragment"
+        android:label="news_details_fragment"
+        tools:layout="@layout/news_details_fragment">
+        <argument
+            android:name="arg_news_details_id"
+            app:argType="integer" />
+    </fragment>
 </navigation>

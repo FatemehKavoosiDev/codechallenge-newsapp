@@ -3,14 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="8dp">
+    android:padding="8dp"
+    tools:context=".ui.newsdetails.NewsDetailsFragment">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/newsDetailsImageView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:src="@drawable/ic_launcher_background"
-        app:layout_constraintDimensionRatio="1:1"
+        android:src="@mipmap/ic_launcher_round"
+        android:scaleType="centerCrop"
+        app:layout_constraintDimensionRatio="4:2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

@@ -10,6 +10,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.codechallengenewsapp.data.model.News
 import com.example.codechallengenewsapp.databinding.NewsFragmentBinding
 import com.example.codechallengenewsapp.utils.ResultState
@@ -25,12 +28,15 @@ class NewsFragment : Fragment() {
         get() = _binding!!
 
     private val newsViewModel: NewsViewModel by viewModels()
+    private lateinit var newsAdapter: NewsAdapter
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
         _binding = NewsFragmentBinding.inflate(layoutInflater)
+
+        initAdapter()
 
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -47,8 +53,15 @@ class NewsFragment : Fragment() {
         return binding.root
     }
 
+    private fun initAdapter() {
+        binding.newsRecyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        newsAdapter = NewsAdapter()
+        binding.newsRecyclerView.adapter = newsAdapter
+    }
+
     private fun showNews(news: List<News>) {
-        //TODO
+        newsAdapter.submitList(news)
     }
 
     private fun showError(errorMessage: String) {

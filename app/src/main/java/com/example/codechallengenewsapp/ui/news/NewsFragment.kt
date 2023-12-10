@@ -11,12 +11,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.codechallengenewsapp.data.model.News
 import com.example.codechallengenewsapp.databinding.NewsFragmentBinding
 import com.example.codechallengenewsapp.utils.ResultState
-import com.example.codechallengenewsapp.utils.myLog
 import com.example.codechallengenewsapp.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch

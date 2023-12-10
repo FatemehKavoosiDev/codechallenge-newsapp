@@ -29,9 +29,12 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:gravity="start"
+            android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/newsImageView"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Title" />
+            android:ellipsize="end"
+            android:maxLines="1"
+            tools:text="Titlesdddddddddddddddddddddddddddddddddddddddddddddd" />
 
         <TextView
             android:id="@+id/newsContentTextView"

@@ -8,6 +8,8 @@ import com.example.codechallengenewsapp.data.model.mapToNews
 import com.example.codechallengenewsapp.data.model.mapToNewsEntity
 import com.example.codechallengenewsapp.utils.myLog
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emitAll
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
@@ -15,13 +17,13 @@ internal class NewsRepositoryImpl @Inject constructor(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource,
 ) : NewsRepository {
-    override suspend fun getAllNews(): Flow<List<News>> {
+    override fun getAllNews(): Flow<List<News>> = flow {
         refreshNews()
-        return localDataSource.getAllNews().map { newsEntity ->
+        emitAll(localDataSource.getAllNews().map { newsEntity ->
             newsEntity.map {
                 it.mapToNews()
             }
-        }
+        })
     }
 
     private suspend fun refreshNews() {

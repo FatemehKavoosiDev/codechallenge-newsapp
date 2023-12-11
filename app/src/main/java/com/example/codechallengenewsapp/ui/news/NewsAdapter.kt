@@ -26,8 +26,8 @@ internal class NewsAdapter(private val onclickItem: (news: News) -> Unit) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(news: News) {
-            binding.newsTitleTextView.text = "pos:$adapterPosition ${news.title}"
-            binding.newsContentTextView.text = news.content
+            "pos:$adapterPosition -id:${news.id} -${news.title}".also { binding.newsTitleTextView.text = it }
+            binding.newsDescriptionTextView.text = news.description
             binding.root.setOnClickListener { onclickItem(news) }
         }
     }

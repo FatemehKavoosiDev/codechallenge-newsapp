@@ -25,6 +25,7 @@ internal class NewsDetailsViewModel @Inject constructor(private val newDetailsUs
         mutableStateFlowNewsDetails.value = ResultState.Loading(true)
         viewModelScope.launch(Dispatchers.IO) {
             newDetailsUseCase(id).catch {
+                mutableStateFlowNewsDetails.value = ResultState.Error(it.message.toString())
             }.collect { news ->
                 mutableStateFlowNewsDetails.value = ResultState.Loading(false)
                 delay(500)

@@ -30,7 +30,7 @@ internal class NewsViewModel @Inject constructor(private val newsUseCase: NewsUs
         mutableStateFlowNewsList.value = ResultState.Loading(true)
         viewModelScope.launch(Dispatchers.IO) {
             newsUseCase().catch {
-                myLog("collect in viewmodel catch")
+                mutableStateFlowNewsList.value = ResultState.Error(it.message.toString())
             }.collect { news ->
                 if (news.isEmpty())
                     mutableStateFlowNewsList.value = ResultState.Empty

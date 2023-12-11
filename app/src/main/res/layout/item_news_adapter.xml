@@ -17,7 +17,8 @@
             android:id="@+id/newsImageView"
             android:layout_width="68dp"
             android:layout_height="68dp"
-            android:src="@drawable/ic_launcher_background"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_place_holder_news"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintBottom_toBottomOf="@id/newsContentTextView"
             app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +35,7 @@
             app:layout_constraintTop_toTopOf="parent"
             android:ellipsize="end"
             android:maxLines="1"
-            tools:text="Titlesdddddddddddddddddddddddddddddddddddddddddddddd" />
+            tools:text="Title Title Title Title Title Title " />
 
         <TextView
             android:id="@+id/newsContentTextView"

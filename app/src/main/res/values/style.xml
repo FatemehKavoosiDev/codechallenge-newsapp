@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Text View Styles -->
+    <style name="TextView_Title" parent="android:Widget.TextView">
+        <item name="android:textSize">@dimen/text_size_medium</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:padding">@dimen/padding_small</item>
+    </style>
+
+    <style name="TextView_Description" parent="android:Widget.TextView">
+        <item name="android:textSize">@dimen/text_size_medium</item>
+        <item name="android:padding">@dimen/padding_small</item>
+
+    </style>
+
+    <style name="TextView_Default" parent="android:Widget.TextView">
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="android:padding">@dimen/padding_small</item>
+    </style>
+
+    <style name="progressBarStyle" parent="Widget.AppCompat.ProgressBar">
+        <item name="android:maxWidth">@dimen/size_xlarge</item>
+        <item name="android:maxHeight">@dimen/size_xlarge</item>
+        <item name="android:layout_margin">@dimen/margin_medium</item>
+    </style>
+
+</resources>

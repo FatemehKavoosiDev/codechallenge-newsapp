@@ -5,8 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.codechallengenewsapp.R
 import com.example.codechallengenewsapp.data.model.News
 import com.example.codechallengenewsapp.databinding.ItemNewsAdapterBinding
+import com.example.codechallengenewsapp.utils.loadImageFromUrl
 
 internal class NewsAdapter(private val onclickItem: (news: News) -> Unit) :
     ListAdapter<News, NewsAdapter.NewsViewHolder>(NewsDiffCallback()) {
@@ -26,9 +28,22 @@ internal class NewsAdapter(private val onclickItem: (news: News) -> Unit) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(news: News) {
-            "pos:$adapterPosition -id:${news.id} -${news.title}".also { binding.newsTitleTextView.text = it }
-            binding.newsDescriptionTextView.text = news.description
-            binding.root.setOnClickListener { onclickItem(news) }
+            news.apply {
+                //show position and id temporarily to test
+                binding.newsTitleTextView.text = "pos:$adapterPosition -id:${id} -${title}"
+                binding.newsDescriptionTextView.text = news.description
+
+                binding.root.setOnClickListener { onclickItem(news) }
+
+                if (urlToImage != null) {
+                    binding.newsImageView.loadImageFromUrl(
+                        urlToImage,
+                        R.drawable.img_place_holder_news
+                    )
+                }
+            }
+
+
         }
     }
 

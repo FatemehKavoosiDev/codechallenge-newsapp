@@ -9,10 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.navArgs
+import com.example.codechallengenewsapp.R
 import com.example.codechallengenewsapp.data.model.NewsDetails
 import com.example.codechallengenewsapp.databinding.NewsDetailsFragmentBinding
 import com.example.codechallengenewsapp.utils.ResultState
 import com.example.codechallengenewsapp.utils.launchAndCollectIn
+import com.example.codechallengenewsapp.utils.loadImageFromUrl
 import com.example.codechallengenewsapp.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -51,6 +53,12 @@ class NewsDetailsFragment : Fragment() {
         binding.newsDetailsDateTextView.text = news.publishedAt
         binding.newsDetailsTitleTextView.text = news.title
         binding.newsDetailsDescriptionTextView.text = news.description
+        if (news.urlToImage != null) {
+            binding.newsDetailsImageView.loadImageFromUrl(
+                news.urlToImage,
+                R.drawable.img_place_holder_news
+            )
+        }
     }
 
     private fun showError(errorMessage: String) {

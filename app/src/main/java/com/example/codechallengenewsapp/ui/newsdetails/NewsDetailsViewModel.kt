@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.codechallengenewsapp.data.model.NewsDetails
 import com.example.codechallengenewsapp.domain.NewDetailsUseCase
 import com.example.codechallengenewsapp.utils.ResultState
-import com.example.codechallengenewsapp.utils.myLog
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -20,22 +19,18 @@ internal class NewsDetailsViewModel @Inject constructor(private val newDetailsUs
     ViewModel() {
     private var mutableStateFlowNewsDetails =
         MutableStateFlow<ResultState<NewsDetails>>(ResultState.Loading(true))
-    val newsListFlow = mutableStateFlowNewsDetails.asStateFlow()
+    val newsDetails = mutableStateFlowNewsDetails.asStateFlow()
 
     fun getNewsDetails(id: Int) {
-        myLog("send id in viewmodel id:$id}")
         mutableStateFlowNewsDetails.value = ResultState.Loading(true)
         viewModelScope.launch(Dispatchers.IO) {
             newDetailsUseCase(id).catch {
-                myLog("collect in viewmodel details catch")
             }.collect { news ->
-                myLog("collect in viewmodel details ${news.id}")
                 mutableStateFlowNewsDetails.value = ResultState.Loading(false)
                 delay(500)
                 mutableStateFlowNewsDetails.value = ResultState.Success(news)
             }
         }
     }
-
 
 }

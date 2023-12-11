@@ -20,10 +20,7 @@ internal fun NewsEntity.mapToNews() = News(
     author = this.author,
     title = this.title,
     description = this.description,
-    url = this.url,
     urlToImage = this.urlToImage,
-    publishedAt = this.publishedAt,
-    content = this.content,
 )
 
 internal fun NewsEntity.mapToNewsDetails() = NewsDetails(

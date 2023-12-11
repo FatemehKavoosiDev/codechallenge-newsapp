@@ -43,6 +43,7 @@ class NewsDetailsFragment : Fragment() {
                 is ResultState.Loading -> showLoading(resultState.isShow)
                 is ResultState.Success -> setDetailsOnView(resultState.data)
                 is ResultState.Error -> showError(resultState.errorMessage)
+                is ResultState.Empty -> showEmptyNews()
             }
         }
         return binding.root
@@ -67,5 +68,9 @@ class NewsDetailsFragment : Fragment() {
 
     private fun showLoading(isShow: Boolean) {
         binding.progressBarNewsDetails.isVisible = isShow
+    }
+
+    private fun showEmptyNews() {
+        this.context?.showToast(resources.getString(R.string.empty_news_details))
     }
 }

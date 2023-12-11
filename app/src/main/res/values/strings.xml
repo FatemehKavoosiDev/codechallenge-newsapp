@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">CodeChallengeNewsApp</string>
+    <string name="empty_news">No news available, Pls check net</string>
+    <string name="empty_news_details">No news Details available, Pls check net</string>
 </resources>

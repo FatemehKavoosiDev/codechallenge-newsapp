@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.codechallengenewsapp.R
 import com.example.codechallengenewsapp.data.model.News
 import com.example.codechallengenewsapp.databinding.NewsFragmentBinding
 import com.example.codechallengenewsapp.utils.ResultState
@@ -42,6 +43,7 @@ class NewsFragment : Fragment() {
                 is ResultState.Loading -> showLoading(resultState.isShow)
                 is ResultState.Success -> showNews(resultState.data)
                 is ResultState.Error -> showError(resultState.errorMessage)
+                is ResultState.Empty -> showEmptyNews()
             }
         }
 
@@ -77,5 +79,8 @@ class NewsFragment : Fragment() {
 
     private fun showLoading(isShow: Boolean) {
         binding.progressBarNews.isVisible = isShow
+    }
+    private fun showEmptyNews() {
+        this.context?.showToast(resources.getString(R.string.empty_news))
     }
 }

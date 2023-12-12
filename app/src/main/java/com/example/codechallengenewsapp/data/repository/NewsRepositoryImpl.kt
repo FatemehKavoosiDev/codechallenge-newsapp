@@ -12,8 +12,6 @@ import com.example.codechallengenewsapp.di.CoroutineModule.CoroutineScopeIo
 import com.example.codechallengenewsapp.utils.myLog
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.emitAll
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -56,10 +54,9 @@ internal class NewsRepositoryImpl @Inject constructor(
         localDataSource.insertNews(listNewsEntity)
     }
 
-    override fun getNewsDetails(id: Int): Flow<NewsDetails> = flow {
-        emitAll(localDataSource.getNewsDetails(id).map { newsEntity ->
+    override fun getNewsDetails(id: Int): Flow<NewsDetails> =
+        localDataSource.getNewsDetails(id).map { newsEntity ->
             newsEntity.mapToNewsDetails()
-        })
-    }
+        }
 
 }

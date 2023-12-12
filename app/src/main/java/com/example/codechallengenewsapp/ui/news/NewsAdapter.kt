@@ -49,7 +49,8 @@ internal class NewsAdapter(private val onclickItem: (news: News) -> Unit) :
 
     class NewsDiffCallback : DiffUtil.ItemCallback<News>() {
         override fun areItemsTheSame(oldItem: News, newItem: News): Boolean {
-            return oldItem.id == newItem.id
+            //Due to the null id in some news,I considered the title to be unique :)
+            return oldItem.title == newItem.title
         }
 
         override fun areContentsTheSame(oldItem: News, newItem: News): Boolean {

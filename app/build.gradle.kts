@@ -90,5 +90,10 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
 
     //picasso
-    implementation ("com.squareup.picasso:picasso:2.8")
+    implementation("com.squareup.picasso:picasso:2.8")
+
+    //Mockito
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+    testImplementation ("io.mockk:mockk:1.13.4")
+    testImplementation ("androidx.arch.core:core-testing:2.2.0")
 }

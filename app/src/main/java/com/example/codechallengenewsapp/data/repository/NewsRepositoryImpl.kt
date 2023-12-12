@@ -8,37 +8,46 @@ import com.example.codechallengenewsapp.data.model.NewsDetails
 import com.example.codechallengenewsapp.data.model.mapToNews
 import com.example.codechallengenewsapp.data.model.mapToNewsDetails
 import com.example.codechallengenewsapp.data.model.mapToNewsEntity
+import com.example.codechallengenewsapp.di.CoroutineModule.CoroutineScopeIo
 import com.example.codechallengenewsapp.utils.myLog
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 internal class NewsRepositoryImpl @Inject constructor(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource,
+    @CoroutineScopeIo private val externalScope: CoroutineScope,
 ) : NewsRepository {
-    override fun getAllNews(): Flow<List<News>> = flow {
+
+    init {
         refreshNews()
-        emitAll(localDataSource.getAllNews().map { newsEntity ->
-            newsEntity.map {
-                it.mapToNews()
-            }
-        })
     }
 
-    private suspend fun refreshNews() {
-        try {
-            val response = remoteDataSource.getAllNews()
-            if (response.isSuccessful) {
-                val listNewsEntity = response.body()!!.data.map { newsNetwork ->
-                    newsNetwork.mapToNewsEntity()
+    override fun getAllNews(): Flow<List<News>> = localDataSource.getAllNews().map { newsEntity ->
+        newsEntity.map {
+            it.mapToNews()
+        }
+    }
+
+
+    private fun refreshNews() {
+        externalScope.launch {
+            try {
+                val response = remoteDataSource.getAllNews()
+                if (response.isSuccessful) {
+                    val listNewsEntity = response.body()!!.data.map { newsNetwork ->
+                        newsNetwork.mapToNewsEntity()
+                    }
+                    updateLocalDataSource(listNewsEntity)
                 }
-                updateLocalDataSource(listNewsEntity)
+            } catch (e: Exception) {
+                myLog("error in refresh news $e")
             }
-        } catch (e: Exception) {
-            myLog("error in refresh news $e")
         }
     }
 

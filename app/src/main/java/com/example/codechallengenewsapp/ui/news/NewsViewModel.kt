@@ -2,8 +2,8 @@ package com.example.codechallengenewsapp.ui.news
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.codechallengenewsapp.data.model.News
 import com.example.codechallengenewsapp.domain.NewsUseCase
+import com.example.codechallengenewsapp.domain.model.News
 import com.example.codechallengenewsapp.utils.ResultState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay

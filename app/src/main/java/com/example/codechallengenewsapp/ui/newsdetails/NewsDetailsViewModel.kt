@@ -2,7 +2,7 @@ package com.example.codechallengenewsapp.ui.newsdetails
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.codechallengenewsapp.data.model.NewsDetails
+import com.example.codechallengenewsapp.domain.model.NewsDetails
 import com.example.codechallengenewsapp.domain.NewDetailsUseCase
 import com.example.codechallengenewsapp.utils.ResultState
 import dagger.hilt.android.lifecycle.HiltViewModel

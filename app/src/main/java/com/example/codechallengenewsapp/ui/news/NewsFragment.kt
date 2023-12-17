@@ -11,7 +11,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.codechallengenewsapp.R
-import com.example.codechallengenewsapp.data.model.News
+import com.example.codechallengenewsapp.domain.model.News
 import com.example.codechallengenewsapp.databinding.NewsFragmentBinding
 import com.example.codechallengenewsapp.utils.ResultState
 import com.example.codechallengenewsapp.utils.launchAndCollectIn

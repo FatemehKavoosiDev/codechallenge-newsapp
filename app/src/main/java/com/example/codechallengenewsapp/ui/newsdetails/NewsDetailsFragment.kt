@@ -10,7 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.navArgs
 import com.example.codechallengenewsapp.R
-import com.example.codechallengenewsapp.data.model.NewsDetails
+import com.example.codechallengenewsapp.domain.model.NewsDetails
 import com.example.codechallengenewsapp.databinding.NewsDetailsFragmentBinding
 import com.example.codechallengenewsapp.utils.ResultState
 import com.example.codechallengenewsapp.utils.launchAndCollectIn

@@ -1,6 +1,6 @@
 package com.example.codechallengenewsapp
 
-import com.example.codechallengenewsapp.data.model.News
+import com.example.codechallengenewsapp.domain.model.News
 
 internal object NewsFake {
 

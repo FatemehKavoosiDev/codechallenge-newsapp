@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.codechallengenewsapp.R
-import com.example.codechallengenewsapp.data.model.News
+import com.example.codechallengenewsapp.domain.model.News
 import com.example.codechallengenewsapp.databinding.ItemNewsAdapterBinding
 import com.example.codechallengenewsapp.utils.loadImageFromUrl
 

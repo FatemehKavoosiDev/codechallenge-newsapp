@@ -2,6 +2,8 @@ package com.example.codechallengenewsapp.data.model
 
 import com.example.codechallengenewsapp.data.datasource.local.entity.NewsEntity
 import com.example.codechallengenewsapp.data.datasource.network.models.NewsNetwork
+import com.example.codechallengenewsapp.domain.model.News
+import com.example.codechallengenewsapp.domain.model.NewsDetails
 
 internal fun NewsNetwork.mapToNewsEntity() = NewsEntity(
     sourceId = this.source.id,

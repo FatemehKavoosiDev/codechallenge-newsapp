@@ -1,4 +1,4 @@
-package com.example.codechallengenewsapp.data.model
+package com.example.codechallengenewsapp.domain.model
 
 
 internal data class NewsDetails(

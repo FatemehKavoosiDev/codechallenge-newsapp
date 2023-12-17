@@ -3,8 +3,8 @@ package com.example.codechallengenewsapp.data.repository
 import com.example.codechallengenewsapp.data.datasource.local.LocalDataSource
 import com.example.codechallengenewsapp.data.datasource.local.entity.NewsEntity
 import com.example.codechallengenewsapp.data.datasource.network.RemoteDataSource
-import com.example.codechallengenewsapp.data.model.News
-import com.example.codechallengenewsapp.data.model.NewsDetails
+import com.example.codechallengenewsapp.domain.model.News
+import com.example.codechallengenewsapp.domain.model.NewsDetails
 import com.example.codechallengenewsapp.data.model.mapToNews
 import com.example.codechallengenewsapp.data.model.mapToNewsDetails
 import com.example.codechallengenewsapp.data.model.mapToNewsEntity

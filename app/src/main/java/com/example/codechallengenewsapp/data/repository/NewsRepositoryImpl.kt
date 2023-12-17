@@ -3,12 +3,12 @@ package com.example.codechallengenewsapp.data.repository
 import com.example.codechallengenewsapp.data.datasource.local.LocalDataSource
 import com.example.codechallengenewsapp.data.datasource.local.entity.NewsEntity
 import com.example.codechallengenewsapp.data.datasource.network.RemoteDataSource
-import com.example.codechallengenewsapp.domain.model.News
-import com.example.codechallengenewsapp.domain.model.NewsDetails
 import com.example.codechallengenewsapp.data.model.mapToNews
 import com.example.codechallengenewsapp.data.model.mapToNewsDetails
 import com.example.codechallengenewsapp.data.model.mapToNewsEntity
 import com.example.codechallengenewsapp.di.CoroutineModule.CoroutineScopeIo
+import com.example.codechallengenewsapp.domain.model.News
+import com.example.codechallengenewsapp.domain.model.NewsDetails
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -43,14 +43,13 @@ internal class NewsRepositoryImpl @Inject constructor(
                     updateLocalDataSource(listNewsEntity)
                 }
             } catch (e: Exception) {
-               // myLog("error in refresh news $e")
+                // myLog("error in refresh news $e")
             }
         }
     }
 
     private suspend fun updateLocalDataSource(listNewsEntity: List<NewsEntity>) {
-        localDataSource.deleteAllNews()
-        localDataSource.insertNews(listNewsEntity)
+        localDataSource.deleteAndInsert(listNewsEntity)
     }
 
     override fun getNewsDetails(id: Int): Flow<NewsDetails> =

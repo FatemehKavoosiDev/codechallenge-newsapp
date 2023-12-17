@@ -21,4 +21,8 @@ internal class LocalDataSourceImpl @Inject constructor(private val newsDao: News
         newsDao.deleteAllNews()
     }
 
+    override suspend fun deleteAndInsert(listNewsEntity: List<NewsEntity>) {
+        newsDao.deleteAndInsertInTransaction(listNewsEntity)
+    }
+
 }

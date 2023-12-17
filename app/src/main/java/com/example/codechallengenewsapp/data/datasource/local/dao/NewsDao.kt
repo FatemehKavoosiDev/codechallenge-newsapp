@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Transaction
 import com.example.codechallengenewsapp.data.datasource.local.entity.NewsEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -20,4 +21,11 @@ interface NewsDao {
 
     @Query("DELETE FROM news")
     suspend fun deleteAllNews()
+
+    @Transaction
+    suspend fun deleteAndInsertInTransaction(newsListEntity: List<NewsEntity>) {
+        // Anything inside this method runs in a single transaction.
+        deleteAllNews()
+        insertNews(newsListEntity)
+    }
 }

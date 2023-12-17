@@ -8,4 +8,5 @@ internal interface LocalDataSource {
     fun getNewsDetails(id: Int): Flow<NewsEntity>
     suspend fun insertNews(newsEntity: List<NewsEntity>)
     suspend fun deleteAllNews()
+    suspend fun deleteAndInsert(listNewsEntity: List<NewsEntity>)
 }

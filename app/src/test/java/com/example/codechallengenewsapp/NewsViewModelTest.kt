@@ -1,6 +1,7 @@
 package com.example.codechallengenewsapp
 
 import com.example.codechallengenewsapp.domain.NewsUseCase
+import com.example.codechallengenewsapp.ui.news.NewsView
 import com.example.codechallengenewsapp.ui.news.NewsViewModel
 import com.example.codechallengenewsapp.utils.ResultState
 import io.mockk.MockKAnnotations
@@ -10,7 +11,6 @@ import io.mockk.impl.annotations.MockK
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.TestCoroutineScheduler
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
@@ -49,9 +49,11 @@ internal class NewsViewModelTest {
 
             // Then
             coVerify { newsUseCase() }
-            assertEquals(ResultState.Loading(false), viewModel.newsListFlow.value)
-            delay(500)
-            assertEquals(ResultState.Success(newsListFake), viewModel.newsListFlow.value)
+            assertEquals(
+                NewsView(newsList = newsListFake, resultState = ResultState.Loading(false)),
+                viewModel.newsListFlow.value
+            )
+
         }
 
     @Test
@@ -64,7 +66,10 @@ internal class NewsViewModelTest {
 
         // Then
         coVerify { newsUseCase() }
-        assertEquals(ResultState.Empty, viewModel.newsListFlow.value)
+        assertEquals(
+            NewsView(emptyList(), resultState = ResultState.Empty),
+            viewModel.newsListFlow.value
+        )
     }
 
 }

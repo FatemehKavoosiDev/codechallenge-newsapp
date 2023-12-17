@@ -11,7 +11,6 @@ import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.TestCoroutineScheduler
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
@@ -39,29 +38,29 @@ internal class NewsViewModelTest {
     }
 
     @Test
-    fun `when collect contain emit list of news, the newsState is equal ResultState-Success`() = runTest {
-        // Given
-        val newsListFake = NewsFake.newsList
-        coEvery { newsUseCase() } returns flowOf(newsListFake)
-        viewModel = NewsViewModel(newsUseCase, dispatcher)
+    fun `when collect contain emit list of news, the newsState is equal ResultState-Success`() =
+        runTest {
+            // Given
+            val newsListFake = NewsFake.newsList
+            coEvery { newsUseCase() } returns flowOf(newsListFake)//stub
 
-        // When
-        newsUseCase().collect()
+            // When
+            viewModel = NewsViewModel(newsUseCase)
 
-        // Then
-        coVerify { newsUseCase() }
-        assertEquals(ResultState.Loading(false), viewModel.newsListFlow.value)
-        delay(500)
-        assertEquals(ResultState.Success(newsListFake), viewModel.newsListFlow.value)
-    }
+            // Then
+            coVerify { newsUseCase() }
+            assertEquals(ResultState.Loading(false), viewModel.newsListFlow.value)
+            delay(500)
+            assertEquals(ResultState.Success(newsListFake), viewModel.newsListFlow.value)
+        }
+
     @Test
     fun `when collect to news is empty,the newsState is equal ResultState-Empty`() = runTest {
         // Given
         coEvery { newsUseCase() } returns flowOf(emptyList())
-        viewModel = NewsViewModel(newsUseCase, dispatcher)
 
         // When
-        newsUseCase().collect()
+        viewModel = NewsViewModel(newsUseCase)
 
         // Then
         coVerify { newsUseCase() }

@@ -2,7 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
 
-     //hilt
+    //hilt
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
 
@@ -95,6 +95,6 @@ dependencies {
 
     //Mockito
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
-    testImplementation ("io.mockk:mockk:1.13.4")
-    testImplementation ("androidx.arch.core:core-testing:2.2.0")
+    testImplementation("io.mockk:mockk:1.13.4")
+    testImplementation("androidx.arch.core:core-testing:2.2.0")
 }

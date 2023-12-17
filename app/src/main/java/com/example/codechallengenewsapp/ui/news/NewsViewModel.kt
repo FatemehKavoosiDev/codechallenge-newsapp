@@ -3,11 +3,9 @@ package com.example.codechallengenewsapp.ui.news
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.codechallengenewsapp.data.model.News
-import com.example.codechallengenewsapp.di.CoroutineModule.IoDispatcher
 import com.example.codechallengenewsapp.domain.NewsUseCase
 import com.example.codechallengenewsapp.utils.ResultState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -17,7 +15,6 @@ import javax.inject.Inject
 @HiltViewModel
 internal class NewsViewModel @Inject constructor(
     private val newsUseCase: NewsUseCase,
-    @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) :
     ViewModel() {
     private var mutableStateFlowNewsList =
@@ -29,7 +26,7 @@ internal class NewsViewModel @Inject constructor(
     }
 
     private fun getNews() {
-        viewModelScope.launch(ioDispatcher) {
+        viewModelScope.launch {
             newsUseCase().collect { news ->
                 if (news.isEmpty())
                     mutableStateFlowNewsList.value = ResultState.Empty
@@ -41,6 +38,5 @@ internal class NewsViewModel @Inject constructor(
             }
         }
     }
-
 
 }

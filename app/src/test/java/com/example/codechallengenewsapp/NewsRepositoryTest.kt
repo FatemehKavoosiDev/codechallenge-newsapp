@@ -13,14 +13,10 @@ import io.mockk.coVerify
 import io.mockk.impl.annotations.MockK
 import io.mockk.mockkStatic
 import junit.framework.TestCase.assertEquals
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.test.TestCoroutineScheduler
 import kotlinx.coroutines.test.TestScope
-import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
-import kotlinx.coroutines.test.setMain
 import org.junit.Before
 import org.junit.Test
 
@@ -36,9 +32,7 @@ internal class NewsRepositoryTest {
 
     private lateinit var repositoryImpl: NewsRepositoryImpl
 
-    private val scheduler = TestCoroutineScheduler()
-    private val dispatcher = UnconfinedTestDispatcher(scheduler)
-    private val testScope = TestScope(dispatcher)
+    private val testScope = TestScope()
 
     private fun mockNews() = News(
         id = 0,
@@ -53,7 +47,6 @@ internal class NewsRepositoryTest {
         MockKAnnotations.init(this)
         mockkStatic(NewsEntity::mapToNews)
         coEvery { any<NewsEntity>().mapToNews() } returns mockNews()
-        Dispatchers.setMain(dispatcher)
         repositoryImpl = NewsRepositoryImpl(remoteDataSource, localDataSource, testScope)
     }
 
